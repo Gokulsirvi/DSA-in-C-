@@ -1,3 +1,4 @@
+//implementation of stack
 #include <iostream>
 using namespace std;
 #define size 6
@@ -21,6 +22,22 @@ void push(int num){
         cout<<"stack full\n";
     }
 }
+void display(){
+    if(top>=0){
+        for(int i=0;i<size;i++){
+            cout<<stack[i]<<"->";
+        }
+        cout<<"\n";
+    }
+}
+void peak(){
+    if(top>=0){
+        cout<<"Peak index of stack = "<<stack[top]<<endl;
+    }
+    else{
+        cout<<"stack is enpty\n";
+    }
+}
 int main() {
     cout << "Try programiz.pro\n";
     push(4);
@@ -28,6 +45,8 @@ int main() {
     push(2);
     push(6);
     push(7);
+    display();
+    peak();
     pop();
     pop();
     pop();
