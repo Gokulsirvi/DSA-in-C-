@@ -28,37 +28,36 @@ char pop(){
     top--;
     return popped;
 }
-void convertPostfix(char infix[],char postfix[]){
-    int i=0,j=0;
-    while(infix[i]!='\0'){
-       char c = infix[j];
-       if(isalnum(c)){
-           postfix[j++]=c;
-       }
-       else if(c=='('){
-           push(c);
-       }
-       else if(c==')'){
-           while(stack[top]=='('){
-               postfix[j++]=pop(); 
-           }
-       }
-       else{
-          while(top!=-1 && precedance(stack[top]) >= precedance(c) ){
-        char popped = stack[top];
-           postfix[j] = popped;
-                  j++;
-             top--;
-}
-               push(c);
-}
-              i++;
-       }while(top!=-1){
-           postfix[j] = stack[top];
-            top--;
-              j++;
-}
-       postfix[j] = '\0';
+void convertPostfix(char infix[],char postfix[]) {
+    int i = 0, j = 0;
+    while (infix[i] != '\0') {
+        char c = infix[i];
+        if (isalnum(c)) {
+            postfix[j++] = c;
+        }
+        else if (c == '(') {
+            push(c);
+        }
+        else if (c == ')') {
+            while (top != -1 && stack[top] != '(') {
+                postfix[j++] = pop();
+            }
+            if (top != -1 && stack[top] == '(') {
+                pop(); 
+            }
+        }
+        else {
+            while (top != -1 && precedance(stack[top]) >= precedance(c)) {
+                postfix[j++] = pop();
+            }
+            push(c);
+        }
+        i++;
+    }
+    while (top != -1) {
+        postfix[j++] = pop();
+    }
+    postfix[j] = '\0';
 }
 
 int main() {
@@ -69,11 +68,3 @@ int main() {
    cout<<postfix;
     return 0;
 }
-
-
-
-
-
-
-
-
